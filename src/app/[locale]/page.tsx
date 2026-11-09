@@ -4,6 +4,7 @@ import Section3 from "@/components/Home/Section3/Section3";
 import Section4 from "@/components/Home/Section4/Section4";
 import Section5 from "@/components/Home/Section5/Section5";
 import Section6 from "@/components/Home/Section6/Section6";
+import DownloadApp from "@/components/Home/DownloadApp/DownloadApp";
 import { gen_JsonLdHomePage } from "@/components/JSON_LD/HomeJsonLd";
 
 export default async function Home() {
@@ -25,6 +26,7 @@ export default async function Home() {
       <Section4 />
       <Section5 />
       <Section6 />
+      <DownloadApp />
     </div>
   );
 }

@@ -138,9 +138,9 @@ function BikeFilter() {
                     <AccordionTrigger className="text-lg font-popin font-medium hover:no-underline cursor-pointer">{t("brand.title")}</AccordionTrigger>
                     <AccordionContent className="border-t border-stroke pt-4 space-y-3 max-h-72 overflow-y-auto">
                         {
-                            bikeBrands.map(i => {
+                            bikeBrands.map((i, indx) => {
                                 const isChecked = selectedbrands.includes(i);
-                                return <div key={i} className="flex items-center gap-3">
+                                return <div key={indx + i} className="flex items-center gap-3">
                                     <Checkbox id={i} className="size-5 cursor-pointer" checked={isChecked} onCheckedChange={() => updateQueryParam("brand", i)} />
                                     <label htmlFor={i} className="font-popin text-base cursor-pointer">{i}</label>
                                 </div>

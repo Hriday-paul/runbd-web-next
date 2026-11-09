@@ -123,12 +123,12 @@ export default function Footer() {
                             <div className="mt-6 flex flex-col gap-4 sm:mt-0">
                                 <p className="text-white font-popin text-[18px] font-medium">Download the app</p>
                                 <div className="flex gap-4 sm:flex-col">
-                                    <Link href="#">
+                                    <a href="https://play.google.com/store/apps/details?id=org.globalrunbd.app&pcampaignid=web_share" target="_blank" rel="noopener noreferrer">
                                         <Image src={google_play} alt="Google Play" width={500} height={200} className="object-contain h-10 w-auto" />
-                                    </Link>
-                                    <Link href="#">
+                                    </a>
+                                    <a href="https://play.google.com/store/apps/details?id=org.globalrunbd.app&pcampaignid=web_share" target="_blank" rel="noopener noreferrer">
                                         <Image src={apple_store} alt="App Store" width={500} height={200} className="object-contain h-10 w-auto" />
-                                    </Link>
+                                    </a>
                                 </div>
                             </div>
                         </div>

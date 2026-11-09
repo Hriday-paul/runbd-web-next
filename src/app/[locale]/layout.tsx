@@ -4,6 +4,7 @@ import ReduxProvider from "@/shared/ReduxProvider";
 import { Toaster } from 'sonner';
 import NextJsTopLoader from "@/shared/NextJsTopLoader";
 import TawkTo from "@/utils/TawkTo";
+import AppDownloadPopup from "@/shared/AppDownloadPopup";
 
 import { ToastContainer } from 'react-toastify';
 
@@ -15,6 +16,7 @@ export default function RootLayout({
     return (
         <ReduxProvider>
             <TawkTo />
+            <AppDownloadPopup />
             <Toaster richColors position="top-right" closeButton />
             <ToastContainer
                 position="top-right"

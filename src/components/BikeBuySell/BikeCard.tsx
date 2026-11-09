@@ -1,3 +1,4 @@
+"use client"
 import { Add } from "@/redux/types";
 import { Bike, Calendar, Component, Gauge, Users } from "lucide-react";
 import Link from "next/link";
@@ -6,11 +7,11 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import { placeHolderBlurImg } from "@/utils/config";
 import { AiOutlineWoman } from "react-icons/ai";
-import { getLocale, getTranslations } from "next-intl/server";
+import { useLocale, useTranslations } from "next-intl";
 
-async function BikeCard({ bike }: { bike: Add }) {
-    const t = await getTranslations("category_page.adCard")
-    const locale = await getLocale();
+function BikeCard({ bike }: { bike: Add }) {
+    const t = useTranslations("category_page.adCard");
+    const locale = useLocale();
     return (
         <div
             className="border border-stroke rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all p-0 font-figtree bg-white">

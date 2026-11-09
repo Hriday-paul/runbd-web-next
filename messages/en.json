@@ -340,6 +340,21 @@
         "question6": "How do I rent a car from the site?",
         "answer6": "Search the 'Car Rent' category, choose a listing, and contact the provider using the contact info in the listing to confirm availability and price."
       }
+    },
+    "downloadApp": {
+      "badge": "Runbd Mobile App",
+      "title": "Buy, Sell & Access Services Anytime on Your Phone",
+      "description": "Download the Runbd app for a faster, smoother experience. Browse thousands of verified listings, post ads in seconds, and manage everything on the go.",
+      "feature1": "Post & manage ads in seconds",
+      "feature2": "Instant updates & real-time alerts",
+      "feature3": "Fast, secure & easy to use",
+      "getItOn": "GET IT ON",
+      "googlePlay": "Google Play",
+      "downloadOn": "Download on the",
+      "appStore": "App Store",
+      "popupTitle": "Get the Runbd Mobile App!",
+      "popupSubtitle": "Download our mobile app for a faster, smoother experience — browse ads, get instant notifications, and post listings on the go.",
+      "maybeLater": "Maybe Later"
     }
   },
   "category_page": {

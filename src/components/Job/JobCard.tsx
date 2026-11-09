@@ -1,3 +1,4 @@
+"use client"
 import { Add } from "@/redux/types";
 import { GrUserWorker } from "react-icons/gr";
 import Link from "next/link";
@@ -6,10 +7,11 @@ import { Button } from "../ui/button";
 import { RiMoneyDollarBoxLine } from "react-icons/ri";
 import { PiBuildingOffice } from "react-icons/pi";
 import { MdOutlineWorkOutline } from "react-icons/md";
-import { getTranslations } from "next-intl/server";
+import { useLocale, useTranslations } from "next-intl";
 
-async function JobCard({ job }: { job: Add }) {
-    const t = await getTranslations("category_page.adCard");
+function JobCard({ job }: { job: Add }) {
+    const t = useTranslations("category_page.adCard");
+    const locale = useLocale();
     return (
         <div
             className="border border-stroke rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all p-0 font-figtree bg-white">

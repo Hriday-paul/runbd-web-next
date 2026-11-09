@@ -1,14 +1,16 @@
+"use client"
 import { Add } from "@/redux/types";
 import Link from "next/link";
 import { SlLocationPin } from "react-icons/sl";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { placeHolderBlurImg } from "@/utils/config";
-import { getTranslations } from "next-intl/server";
+import { useLocale, useTranslations } from "next-intl";
 
-async function WorkShopCard({ workShop }: { workShop: Add }) {
+function WorkShopCard({ workShop }: { workShop: Add }) {
 
-    const t = await getTranslations("category_page.adCard");
+    const t = useTranslations("category_page.adCard");
+    const locale = useLocale();
 
     return (
         <div
