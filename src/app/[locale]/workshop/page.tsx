@@ -112,7 +112,7 @@ async function Workshop({
             <div>
               <Searchbar />
               <Suspense fallback={<Adsloading />}>
-                <WorkShops adsPromise={adsPromise} limit={limit} page={Number(page)} sort={sort} />
+                <WorkShops adsPromise={adsPromise} limit={limit} page={Number(page)} sort={sort} query={query} />
               </Suspense>
             </div>
 

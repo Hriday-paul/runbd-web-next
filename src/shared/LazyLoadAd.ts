@@ -62,10 +62,12 @@ type UseLazyLoadProps<T> = {
     initialHasMore?: boolean;
 };
 
+const OBSERVER_OPTIONS = { rootMargin: "400px" };
+
 const useLazyLoad = <T,>({
     triggerRef,
     onGrabData,
-    options,
+    options = OBSERVER_OPTIONS,
     initialData = [],
     initialPage = 1,
     initialHasMore = true,

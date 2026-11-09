@@ -119,7 +119,7 @@ async function CarRent({
                 <Searchbar />
 
                 <Suspense fallback={<Adsloading />}>
-                  <RentCars adsPromise={adsPromise} limit={limit} page={Number(page)} sort={sort} />
+                  <RentCars adsPromise={adsPromise} limit={limit} page={Number(page)} sort={sort} query={query} />
                 </Suspense>
 
               </div>

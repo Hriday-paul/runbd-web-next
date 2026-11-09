@@ -116,7 +116,7 @@ async function Lawyer({
                             <Searchbar />
 
                             <Suspense fallback={<Adsloading />}>
-                                <Lawyers adsPromise={adsPromise} limit={limit} page={Number(page)} sort={sort} />
+                                <Lawyers adsPromise={adsPromise} limit={limit} page={Number(page)} sort={sort} query={query} />
                             </Suspense>
 
                         </div>

@@ -12,20 +12,16 @@ import { LoadingCard } from '@/shared/LoadingCard';
 import { Add } from '@/redux/types';
 import { TextTruncate } from '@/utils/TextTruncate';
 import { getTranslations } from 'next-intl/server';
+import { notFound } from 'next/navigation'
 
 // ---------------dynamic metadata--------------
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
-  const fallback = {
-    title: "Not Found | Runbd",
-    description: "Listing you are looking for is not available.",
-    metadataBase: new URL('https://runbd.org'),
-  };
   try {
     const { id } = await params;
     const { data } = await GetAdDetails({ id }) as { data: Add };
 
     if (!data) {
-      return fallback;
+      return notFound();
     }
 
     return {
@@ -63,7 +59,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
     }
   } catch {
-    return fallback
+    throw new Error("Have an issue on the page");
   }
 }
 

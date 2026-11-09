@@ -116,7 +116,7 @@ async function Exchang({
               <Searchbar />
 
               <Suspense fallback={<Adsloading />}>
-                <Exchanges adsPromise={adsPromise} limit={limit} page={Number(page)} sort={sort} />
+                <Exchanges adsPromise={adsPromise} limit={limit} page={Number(page)} sort={sort} query={query} />
               </Suspense>
 
             </div>

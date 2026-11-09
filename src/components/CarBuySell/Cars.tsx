@@ -33,10 +33,9 @@ async function Cars({ adsPromise, page, limit, sort, query }: { adsPromise: Prom
                     <PiSlidersHorizontalDuotone className="text-xl" />
                     {t("item_found", { count: data?.data?.meta?.total })}
                 </p>
-                <SortBar limit={limit} />
             </div>
 
-            <CarItems query={query} initialData={data?.data?.data || []} initialMeta={data?.data?.meta} key={JSON.stringify(query)} notFoundMsg={t("not_found")}/>
+            <CarItems query={query} initialData={data?.data?.data || []} initialMeta={data?.data?.meta} key={JSON.stringify(query)} notFoundMsg={t("not_found")} />
         </div>
     )
 }

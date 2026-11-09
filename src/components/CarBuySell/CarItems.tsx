@@ -1,5 +1,5 @@
 "use client"
-import { useAllCarsMutation } from '@/redux/api/ads.api';
+import { useLazyAllcarsQuery } from '@/redux/api/ads.api';
 import { Add, IMeta } from '@/redux/types'
 import useLazyLoad from '@/shared/LazyLoadAd';
 import { useRef } from 'react'
@@ -9,7 +9,7 @@ import { ImSpinner8 } from 'react-icons/im';
 
 function CarItems({ query, initialData, initialMeta, notFoundMsg }: { query: { [key: string]: string | undefined }, initialData: Add[], initialMeta: IMeta, notFoundMsg?: string }) {
 
-    const [loadCars, { isLoading }] = useAllCarsMutation();
+    const [loadCars, { isLoading }] = useLazyAllcarsQuery();
     const triggerRef = useRef(null);
 
     const loadNextPage = async (page: number) => {
@@ -55,8 +55,8 @@ function CarItems({ query, initialData, initialMeta, notFoundMsg }: { query: { [
                 {hasMore && <div ref={triggerRef} style={{ height: 1 }} />}
             </div>
             {
-                isLoading && hasMore && <div className="flex-center h-16 md:h-20 lg:h-24">
-                    <ImSpinner8 className="text-2xl lg:text-3xl text-primary animate-spin" />
+                isLoading && hasMore && <div className='flex justify-center items-center h-16 md:h-20 lg:h-24'>
+                    <div className="w-8 lg:w-10 aspect-square rounded-full border-[4px] border-gray-200 border-r-primary animate-spin"></div>
                 </div>
             }
         </div>

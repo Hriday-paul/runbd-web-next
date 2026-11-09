@@ -108,7 +108,7 @@ async function Accesories({
               <Searchbar />
 
               <Suspense fallback={<Adsloading />}>
-                <Accessories adsPromise={adsPromise} limit={limit} page={Number(page)} sort={sort} />
+                <Accessories adsPromise={adsPromise} limit={limit} page={Number(page)} sort={sort} query={query} />
               </Suspense>
 
             </div>

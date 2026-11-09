@@ -115,7 +115,7 @@ async function JobList({
               <Searchbar />
 
               <Suspense fallback={<Adsloading />}>
-                <Jobs adsPromise={adsPromise} limit={limit} page={Number(page)} sort={sort} />
+                <Jobs adsPromise={adsPromise} limit={limit} page={Number(page)} sort={sort} query={query} />
               </Suspense>
 
             </div>

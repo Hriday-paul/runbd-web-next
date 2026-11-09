@@ -54,13 +54,6 @@ const AddApi = baseApi.injectEndpoints({
             }),
             providesTags: ['ads', "cars"]
         }),
-        allCars: builder.mutation<{ message: string, data: { data: Add[], meta: IMeta } }, {}>({
-            query: (query) => ({
-                url: '/ads/cars',
-                params: query,
-                method: "GET"
-            }),
-        }),
         addcar: builder.mutation<{ message: string }, any>({
             query: (body) => ({
                 url: '/ads/cars',
@@ -258,13 +251,13 @@ const AddApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useAllcarsQuery, useAllCarsMutation, useMaxcarsCountQuery, useAllBikesQuery, useMaxBikesCountQuery, 
+export const { useAllcarsQuery, useLazyAllcarsQuery, useMaxcarsCountQuery, useAllBikesQuery, useLazyAllBikesQuery, useMaxBikesCountQuery, 
 
-    useAllWorkshopsQuery, useUpdateWorkshopMutation,
+    useAllWorkshopsQuery, useLazyAllWorkshopsQuery, useUpdateWorkshopMutation,
 
-     useAllAccessoriesQuery, useAllJobsQuery, 
-     useAllLawyersQuery, useUpdateLawyerMutation, 
-     useAllExchangesQuery, useAllRentcarQuery, 
+     useAllAccessoriesQuery, useLazyAllAccessoriesQuery, useAllJobsQuery, useLazyAllJobsQuery, 
+     useAllLawyersQuery, useLazyAllLawyersQuery, useUpdateLawyerMutation, 
+     useAllExchangesQuery, useLazyAllExchangesQuery, useAllRentcarQuery, useLazyAllRentcarQuery, 
      
      useAddDetailsQuery, useAllAdsQuery, useFeatureAddMutation, useBumpAddMutation, useDltAddMutation, useDltAdImageMutation,
     
