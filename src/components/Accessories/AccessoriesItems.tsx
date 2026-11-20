@@ -14,9 +14,8 @@ function AccessoriesItems({ query, initialData, initialMeta, notFoundMsg }: { qu
     const loadNextPage = async (page: number) => {
         try {
 
-            query.page = page.toString();
 
-            const res = await loadAccessories(query).unwrap();
+            const res = await loadAccessories({ ...query, page: page.toString() }).unwrap();
             const data = res?.data?.data || [];
             const meta = res?.data?.meta;
 

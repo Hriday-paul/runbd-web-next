@@ -1,8 +1,4 @@
-import { useEffect, useReducer, useCallback } from "react";
-import debounce from "lodash.debounce";
-
-const INTERSECTION_THRESHOLD = 5;
-const LOAD_DELAY_MS = 500;
+import { useEffect, useReducer, useRef } from "react";
 
 type State<T> = {
     loading: boolean;
@@ -62,12 +58,12 @@ type UseLazyLoadProps<T> = {
     initialHasMore?: boolean;
 };
 
-const OBSERVER_OPTIONS = { rootMargin: "400px" };
+const DEFAULT_ROOT_MARGIN = "400px";
 
 const useLazyLoad = <T,>({
     triggerRef,
     onGrabData,
-    options = OBSERVER_OPTIONS,
+    options,
     initialData = [],
     initialPage = 1,
     initialHasMore = true,
@@ -82,67 +78,50 @@ const useLazyLoad = <T,>({
         }
     );
 
-    const _handleEntry = async (entry: IntersectionObserverEntry) => {
-        const boundingRect = entry.boundingClientRect;
-        const intersectionRect = entry.intersectionRect;
+    // Refs so the observer callback always sees the latest values
+    // without re-creating the observer on every render.
+    const stateRef = useRef(state);
+    stateRef.current = state;
+    const onGrabDataRef = useRef(onGrabData);
+    onGrabDataRef.current = onGrabData;
+    const inFlightRef = useRef(false);
 
-        if (
-            !state.loading &&
-            state.hasMore &&
-            entry.isIntersecting &&
-            intersectionRect.bottom - boundingRect.bottom <=
-            INTERSECTION_THRESHOLD
-        ) {
-            dispatch({
-                type: "set",
-                payload: {
-                    loading: true,
-                },
-            });
-
-            const { data, hasMore } = await onGrabData(state.currentPage);
-
-            dispatch({
-                type: "onGrabData",
-                payload: {
-                    data,
-                    hasMore,
-                },
-            });
-        }
-    };
-
-    const handleEntry = debounce(_handleEntry, state.currentPage === 1 ? 0 : LOAD_DELAY_MS);
-
-    const onIntersect = useCallback(
-        (entries: IntersectionObserverEntry[]) => {
-            handleEntry(entries[0]);
-        },
-        [handleEntry]
-    );
+    const rootMargin = options?.rootMargin ?? DEFAULT_ROOT_MARGIN;
+    const threshold = options?.threshold;
 
     useEffect(() => {
-        // Stop observing entirely once there's nothing left to load
-        if (!state.hasMore) {
-            handleEntry.cancel();
-            return;
-        }
+        if (!state.hasMore || state.loading) return;
 
-        if (triggerRef.current) {
-            const container = triggerRef.current;
+        const container = triggerRef.current;
+        if (!container) return;
 
-            const observer = new IntersectionObserver(
-                onIntersect,
-                options
-            );
+        const observer = new IntersectionObserver(
+            async (entries) => {
+                const entry = entries[0];
+                const { hasMore, currentPage } = stateRef.current;
+                if (!entry?.isIntersecting || !hasMore || inFlightRef.current) return;
 
-            observer.observe(container);
-
-            return () => {
+                inFlightRef.current = true;
                 observer.disconnect();
-            };
-        }
-    }, [triggerRef, onIntersect, options, state.hasMore]);
+                dispatch({ type: "set", payload: { loading: true } });
+
+                try {
+                    const result = await onGrabDataRef.current(currentPage);
+                    dispatch({ type: "onGrabData", payload: result });
+                } catch {
+                    dispatch({ type: "set", payload: { loading: false, hasMore: false } });
+                } finally {
+                    inFlightRef.current = false;
+                }
+            },
+            { rootMargin, threshold }
+        );
+
+        observer.observe(container);
+        return () => observer.disconnect();
+        // Re-observe after each page loads; if the trigger is still visible
+        // (short page), the observer fires immediately and loads the next page.
+    }, [triggerRef, rootMargin, threshold, state.hasMore, state.loading, state.currentPage]);
 
     return state;
 };

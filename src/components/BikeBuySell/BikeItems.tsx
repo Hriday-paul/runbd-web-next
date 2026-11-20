@@ -14,9 +14,8 @@ function BikeItems({ query, initialData, initialMeta, notFoundMsg }: { query: { 
     const loadNextPage = async (page: number) => {
         try {
 
-            query.page = page.toString();
 
-            const res = await loadBikes(query).unwrap();
+            const res = await loadBikes({ ...query, page: page.toString() }).unwrap();
             const data = res?.data?.data || [];
             const meta = res?.data?.meta;
 
